@@ -1,83 +1,106 @@
-# 🚀 CSIT 349: Autobiography and Portfolio App
+# 🚀 John Erick I. Santizo — Autobiography & Portfolio App
 
-An interactive, responsive personal portfolio and autobiography web application built with **Streamlit**. Designed according to the **CSIT 349 - Applied AI** course rubric for full marks and the **+10 Option B bonus points**.
-
----
-
-## 🌟 Key Features & Rubric Checklist
-
-- **About You**: Full name, program, section, contact details, short biography, and profile photo stand-in.
-- **Autobiography**: Deep dive into your personal story, academic credentials, and interactive career milestones timeline using `st.tabs`.
-- **Skills Matrix & Analytics**: Interactive domain filter (`st.selectbox`), proficiency bar chart (`st.bar_chart`) with numeric values, and toggleable raw data table (`st.checkbox` + `st.dataframe`).
-- **Projects Showcase**: 4 projects with role, technology stack tags, summary, outcome, and repository link, filterable by tech (`st.multiselect`) and complexity (`st.slider`).
-- **GitHub Integration**: Direct GitHub link, live GitHub contribution graph heatmap (`ghchart.rshah.org`), and interactive GitHub username switcher in the sidebar.
-- **Hobbies & Interests**: Dedicated cards displaying personal hobbies, categories, and descriptions.
-- **Interactive Feedback Form**: Functional contact form (`st.form` & `st.form_submit_button`) with immediate response, feedback session logging (`st.session_state`), and celebratory animations (`st.balloons`).
-- **Smooth Scrolling Animation**: Glassmorphic sticky top navigation bar with anchor tags and CSS `scroll-behavior: smooth` for fluid navigation.
-- **Bonus Extras Included**: Downloadable resume button (`st.download_button`), metrics (`st.metric`), custom theme styles, expanders, and session state.
+An interactive, responsive personal portfolio and autobiography web application built with **Streamlit**.  
+Developed for **CSIT 349 - Applied AI (Section F1)** adhering to all rubric criteria and configured for **Option B (+10 Bonus Points)** deployment on Streamlit Community Cloud.
 
 ---
 
-## ⚙️ How to Personalize Your Details
+## 👨‍💻 Student Information
+- **Name:** John Erick I. Santizo
+- **Course & Section:** CSIT 349 - F1
+- **Program & Year:** BS Computer Science, 3rd Year
+- **Institution:** Cebu Institute of Technology - University
+- **GitHub:** [@eitophetamine9](https://github.com/eitophetamine9)
+- **Role Focus:** Aspiring Cybersecurity Analyst, Full-Stack Developer, Game Developer
 
-All personal information is cleanly organized in a single configuration block at the very top of [`app.py`](app.py):
+---
 
-1. Open [`app.py`](app.py).
-2. Locate the **`PORTFOLIO_CONFIG`** dictionary near line 14.
-3. Edit the following fields with your personal details:
-   - `NAME`: Your full name.
-   - `COURSE_SECTION`: Your course section (e.g., `CSIT 349 - Section 3A`).
-   - `PROGRAM_YEAR`: Your degree program and year level.
-   - `GITHUB_USERNAME`: Your GitHub username (this automatically renders your real contribution chart!).
-   - `SHORT_BIO`: Your personal summary.
-   - `AUTOBIOGRAPHY`: Your journey, education history, and milestones.
-   - `SKILLS`: Your technical skills with numeric proficiencies (0-100).
-   - `PROJECTS`: Your own titles, roles, tools, and outcomes.
-   - `HOBBIES`: Your personal hobbies, icons, and descriptions.
+## 🌟 Rubric & Features Overview
+
+| Requirement | Implementation Details |
+| :--- | :--- |
+| **About You** | Profile photo (`assets/profile.png`), program & year, section badge, and personal bio. |
+| **Autobiography** | Interactive `st.tabs` covering personal journey, academic history, milestones, and personal hobbies. |
+| **Skills Matrix** | Technical proficiency chart (`st.bar_chart`), category filter (`st.selectbox`), proficiency slider (`st.slider`), and toggleable table (`st.dataframe`). |
+| **Featured Projects** | 2x2 grid layout showcasing 5 projects with roles, tools, descriptions, and repository links. |
+| **Certificates** | 2x2 showcase displaying 4 accredited certifications (C, Java, PSITE, OWASP) with images. |
+| **GitHub Integration** | Direct profile link + full-width live commit activity heatmap (`ghchart.rshah.org`). |
+| **Feedback Form** | Centered compact `st.form` storing feedback dynamically with `st.session_state`. |
+| **Sidebar & Layout** | Subtle sidebar with quick navigation and full-width multi-column layouts (`st.columns`). |
+| **Aesthetics** | Smooth-scrolling sticky navbar, dark slate theme, and **Plus Jakarta Sans** typography. |
+
+---
+
+## 📂 Project Architecture
+
+The codebase has been refactored into a modular, clean component architecture:
+
+```
+StreamlitPortfolio/
+├── app.py                     # Main application entry point orchestrating all components
+├── config.py                  # Centralized data store (biography, skills, projects, certs)
+├── styles.py                  # Custom CSS (Google Fonts, dark theme, sticky navbar, cards)
+├── components/
+│   ├── __init__.py
+│   ├── sidebar.py             # Subtle sidebar component (rubric compliance)
+│   ├── hero.py                # Hero section with avatar, info, and metrics
+│   ├── autobiography.py       # Autobiography, education, milestones, & hobbies tabs
+│   ├── skills.py              # Interactive skill analytics (chart + table)
+│   ├── projects.py            # Featured projects 2x2 grid
+│   ├── certificates.py        # 2x2 certificates grid
+│   ├── github_section.py      # GitHub profile link and live commit heatmap
+│   └── contact.py             # Centered, compact feedback form
+├── assets/
+│   ├── profile.png            # Profile photo
+│   ├── cert1.png              # OWASP Cybersecurity APEX 2026
+│   ├── cert2.png              # Java Certification (CodeChum)
+│   ├── cert3.png              # C Certification (CodeChum)
+│   └── cert4.png              # PSITE Student Congress 2026
+├── requirements.txt           # Python dependencies for Streamlit Community Cloud
+└── README.md                  # Documentation and deployment guide
+```
 
 ---
 
 ## 💻 Running the App Locally
 
-Ensure you have Python 3.10+ installed:
+Ensure Python 3.10+ is installed:
 
-```bash
-# Install dependencies
+```powershell
+# 1. Install dependencies
 pip install -r requirements.txt
 
-# Launch the Streamlit app
+# 2. Launch the Streamlit application
 streamlit run app.py
 ```
 *(If `streamlit` command is not in your system PATH, run `python -m streamlit run app.py`)*
 
-Then open your browser at `http://localhost:8501`.
+Open **`http://localhost:8501`** in your browser.
 
 ---
 
-## 🌐 Option B (Bonus +10 Points): Deploy to Streamlit Community Cloud
+## ☁️ Option B (Bonus +10 Points): Deploy to Streamlit Community Cloud
 
-To earn the bonus points, deploy your app to Streamlit Community Cloud so it opens publicly even when your computer is off:
+Follow these steps to deploy your repository publicly:
 
-### Step 1: Initialize Git and Commit
-```bash
-git init
-git add .
-git commit -m "feat: complete autobiography and portfolio app"
+### Step 1: Create a Public GitHub Repository
+1. Go to [github.com/new](https://github.com/new).
+2. Name your repository (e.g. `StreamlitPortfolio`).
+3. Make sure it is set to **Public** and leave "Initialize this repository with a README" unchecked.
+
+### Step 2: Push Your Local Code to GitHub
+Open PowerShell in this project folder and run:
+
+```powershell
+git remote add origin https://github.com/eitophetamine9/<YOUR_REPO_NAME>.git
+git branch -M main
+git push -u origin main
 ```
 
-### Step 2: Push to a Public GitHub Repository
-1. Go to [GitHub](https://github.com/new) and create a new **public** repository (e.g. `streamlit-portfolio`).
-2. Run the commands shown by GitHub to push your local repository:
-   ```bash
-   git remote add origin https://github.com/<YOUR_GITHUB_USERNAME>/streamlit-portfolio.git
-   git branch -M main
-   git push -u origin main
-   ```
-
-### Step 3: Deploy to Streamlit Community Cloud
-1. Go to [share.streamlit.io](https://share.streamlit.io) and sign in with your GitHub account.
+### Step 3: Deploy on Streamlit Community Cloud
+1. Go to [share.streamlit.io](https://share.streamlit.io) and log in with your GitHub account.
 2. Click **"New app"** (or **"Deploy an app"**).
-3. Select your repository: `<YOUR_GITHUB_USERNAME>/streamlit-portfolio`.
-4. Set Main file path: `app.py`.
+3. Select your repository: `eitophetamine9/<YOUR_REPO_NAME>`.
+4. Ensure **Main file path** is set to: `app.py`.
 5. Click **"Deploy"**.
-6. Once deployed, copy your public `.streamlit.app` URL and submit it!
+6. Once built, copy your live public URL (e.g. `https://<YOUR_APP>.streamlit.app`) and submit it to get the **+10 bonus points**!
