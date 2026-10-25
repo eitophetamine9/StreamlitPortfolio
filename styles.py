@@ -4,11 +4,92 @@ def apply_custom_styles():
     """Injects modern Plus Jakarta Sans typography, dark slate theme, and smooth scroll styles."""
     st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
-    /* Modern Typography */
+    /* 1. Guarantee that raw text ligature strings NEVER display */
+    [data-testid="stExpandSidebarButton"] span,
+    [data-testid="stSidebarCollapseButton"] span,
+    header button[aria-label="Expand sidebar"] span,
+    button[aria-label="Collapse sidebar"] span {
+        display: none !important;
+        font-size: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+        line-height: 0 !important;
+        color: transparent !important;
+        visibility: hidden !important;
+        overflow: hidden !important;
+    }
+
+    /* 2. Style Expand sidebar button with guaranteed SVG double chevron */
+    [data-testid="stExpandSidebarButton"],
+    header button[aria-label="Expand sidebar"] {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 2.25rem !important;
+        height: 2.25rem !important;
+        background: transparent !important;
+        border: none !important;
+        cursor: pointer !important;
+        position: relative !important;
+    }
+
+    [data-testid="stExpandSidebarButton"]::before,
+    header button[aria-label="Expand sidebar"]::before {
+        content: "" !important;
+        display: block !important;
+        width: 20px !important;
+        height: 20px !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        background-size: contain !important;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='13 17 18 12 13 7'/%3E%3Cpolyline points='6 17 11 12 6 7'/%3E%3C/svg%3E") !important;
+        transition: transform 0.2s ease, filter 0.2s ease !important;
+    }
+
+    [data-testid="stExpandSidebarButton"]:hover::before,
+    header button[aria-label="Expand sidebar"]:hover::before {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2360a5fa' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='13 17 18 12 13 7'/%3E%3Cpolyline points='6 17 11 12 6 7'/%3E%3C/svg%3E") !important;
+        transform: scale(1.1) !important;
+    }
+
+    /* 3. Style Collapse sidebar button with guaranteed SVG double chevron */
+    [data-testid="stSidebarCollapseButton"] button,
+    button[aria-label="Collapse sidebar"] {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 2.25rem !important;
+        height: 2.25rem !important;
+        background: transparent !important;
+        border: none !important;
+        cursor: pointer !important;
+        position: relative !important;
+    }
+
+    [data-testid="stSidebarCollapseButton"] button::before,
+    button[aria-label="Collapse sidebar"]::before {
+        content: "" !important;
+        display: block !important;
+        width: 20px !important;
+        height: 20px !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        background-size: contain !important;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='11 17 6 12 11 7'/%3E%3Cpolyline points='18 17 13 12 18 7'/%3E%3C/svg%3E") !important;
+        transition: transform 0.2s ease, filter 0.2s ease !important;
+    }
+
+    [data-testid="stSidebarCollapseButton"] button:hover::before,
+    button[aria-label="Collapse sidebar"]:hover::before {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2360a5fa' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='11 17 6 12 11 7'/%3E%3Cpolyline points='18 17 13 12 18 7'/%3E%3C/svg%3E") !important;
+        transform: scale(1.1) !important;
+    }
+
+    /* Modern Typography - scoped to content and text elements */
     html, body, [data-testid="stAppViewContainer"], .stMarkdown, .stText, p, label, input, select, textarea {
-        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         letter-spacing: -0.01em;
     }
 
@@ -16,75 +97,6 @@ def apply_custom_styles():
         font-family: 'Plus Jakarta Sans', sans-serif !important;
         font-weight: 700 !important;
         letter-spacing: -0.025em !important;
-    }
-
-    /* Fix Streamlit Expand & Collapse Sidebar Buttons (stExpandSidebarButton) */
-    [data-testid="stExpandSidebarButton"],
-    button[data-testid="stExpandSidebarButton"],
-    button[aria-label="Expand sidebar"],
-    [data-testid="collapsedControl"],
-    [data-testid="stSidebarCollapsedControl"],
-    [data-testid="stSidebarCollapseButton"] button,
-    button[aria-label="Collapse sidebar"] {
-        display: inline-flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        position: relative !important;
-        overflow: hidden !important;
-        min-width: 2.2rem !important;
-        min-height: 2.2rem !important;
-    }
-
-    /* Completely suppress the raw text ligature (keyboard_double_arrow_right) */
-    [data-testid="stExpandSidebarButton"] span,
-    [data-testid="stExpandSidebarButton"] svg,
-    button[data-testid="stExpandSidebarButton"] span,
-    button[data-testid="stExpandSidebarButton"] svg,
-    button[aria-label="Expand sidebar"] span,
-    button[aria-label="Expand sidebar"] svg,
-    [data-testid="stSidebarCollapseButton"] span,
-    [data-testid="stSidebarCollapseButton"] svg,
-    button[aria-label="Collapse sidebar"] span,
-    button[aria-label="Collapse sidebar"] svg,
-    [data-testid="collapsedControl"] span,
-    [data-testid="stSidebarCollapsedControl"] span {
-        font-size: 0 !important;
-        line-height: 0 !important;
-        width: 0 !important;
-        height: 0 !important;
-        display: none !important;
-        visibility: hidden !important;
-        opacity: 0 !important;
-    }
-
-    /* Render crisp visual arrows via pseudo-elements */
-    [data-testid="stExpandSidebarButton"]::after,
-    button[data-testid="stExpandSidebarButton"]::after,
-    button[aria-label="Expand sidebar"]::after,
-    [data-testid="collapsedControl"]::after,
-    [data-testid="stSidebarCollapsedControl"]::after {
-        content: "»" !important;
-        font-size: 1.4rem !important;
-        font-weight: 700 !important;
-        color: #60a5fa !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        line-height: 1 !important;
-        visibility: visible !important;
-    }
-
-    [data-testid="stSidebarCollapseButton"] button::after,
-    button[aria-label="Collapse sidebar"]::after {
-        content: "«" !important;
-        font-size: 1.4rem !important;
-        font-weight: 700 !important;
-        color: #60a5fa !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        line-height: 1 !important;
-        visibility: visible !important;
     }
 
     code, kbd, samp, pre {
