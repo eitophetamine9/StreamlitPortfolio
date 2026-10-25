@@ -18,39 +18,73 @@ def apply_custom_styles():
         letter-spacing: -0.025em !important;
     }
 
-    /* Completely eliminate double_arrow_right text leak by hiding raw ligature text */
-    [data-testid="collapsedControl"] span,
-    [data-testid="stSidebarCollapsedControl"] span,
-    [data-testid="stSidebarCollapseButton"] span {
-        font-size: 0 !important;
-        line-height: 0 !important;
-        visibility: hidden !important;
-        display: none !important;
+    /* Fix Streamlit Expand & Collapse Sidebar Buttons (stExpandSidebarButton) */
+    [data-testid="stExpandSidebarButton"],
+    button[data-testid="stExpandSidebarButton"],
+    button[aria-label="Expand sidebar"],
+    [data-testid="collapsedControl"],
+    [data-testid="stSidebarCollapsedControl"],
+    [data-testid="stSidebarCollapseButton"] button,
+    button[aria-label="Collapse sidebar"] {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        position: relative !important;
+        overflow: hidden !important;
+        min-width: 2.2rem !important;
+        min-height: 2.2rem !important;
     }
 
-    /* Render a clean visual arrow instead of broken text */
-    [data-testid="collapsedControl"] button::after,
-    [data-testid="stSidebarCollapsedControl"] button::after,
+    /* Completely suppress the raw text ligature (keyboard_double_arrow_right) */
+    [data-testid="stExpandSidebarButton"] span,
+    [data-testid="stExpandSidebarButton"] svg,
+    button[data-testid="stExpandSidebarButton"] span,
+    button[data-testid="stExpandSidebarButton"] svg,
+    button[aria-label="Expand sidebar"] span,
+    button[aria-label="Expand sidebar"] svg,
+    [data-testid="stSidebarCollapseButton"] span,
+    [data-testid="stSidebarCollapseButton"] svg,
+    button[aria-label="Collapse sidebar"] span,
+    button[aria-label="Collapse sidebar"] svg,
+    [data-testid="collapsedControl"] span,
+    [data-testid="stSidebarCollapsedControl"] span {
+        font-size: 0 !important;
+        line-height: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+    }
+
+    /* Render crisp visual arrows via pseudo-elements */
+    [data-testid="stExpandSidebarButton"]::after,
+    button[data-testid="stExpandSidebarButton"]::after,
+    button[aria-label="Expand sidebar"]::after,
     [data-testid="collapsedControl"]::after,
     [data-testid="stSidebarCollapsedControl"]::after {
         content: "»" !important;
-        font-size: 1.3rem !important;
-        font-weight: 800 !important;
+        font-size: 1.4rem !important;
+        font-weight: 700 !important;
         color: #60a5fa !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        line-height: 1 !important;
         visibility: visible !important;
-        display: block !important;
-        text-align: center !important;
     }
 
     [data-testid="stSidebarCollapseButton"] button::after,
-    [data-testid="stSidebarCollapseButton"]::after {
+    button[aria-label="Collapse sidebar"]::after {
         content: "«" !important;
-        font-size: 1.3rem !important;
-        font-weight: 800 !important;
+        font-size: 1.4rem !important;
+        font-weight: 700 !important;
         color: #60a5fa !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        line-height: 1 !important;
         visibility: visible !important;
-        display: block !important;
-        text-align: center !important;
     }
 
     code, kbd, samp, pre {
