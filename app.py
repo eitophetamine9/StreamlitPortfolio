@@ -19,21 +19,22 @@ CONFIG = {
     ),
     "EDUCATION": [
         {"level": "College", "school": "Cebu Institute of Technology - University", "period": "2024 - Present", "details": "BS Computer Science"},
-        {"level": "Senior High", "school": "University of Cebu - METC", "period": "2021 - 2024", "details": "STEM Strand / Honors"}
+        {"level": "Senior High", "school": "University of Cebu - METC", "period": "2021 - 2024", "details": "STEM Strand"}
     ],
     "MILESTONES": [
         {"year": "2024-2025", "event": "Parangal Academic Achiever"},
-        {"year": "2026", "event": "Game Gauntlet - Sim Jam Participant"},
+        {"year": "2025", "event": "Finished our first game for capstone - Luck in the Dungeon"},
         {"year": "2026", "event": "First solo game development project - Spirit Contract Evo Idle "},
+        {"year": "2026", "event": "Game Gauntlet - Sim Jam Participant"},
     ],
 
     # ── Hobbies ──
     "HOBBIES": [
-        {"name": "Gaming", "desc": "Playing indie and triple A games alike, enjoying the storyline along the way"},
+        {"name": "Gaming", "desc": "Playing indie and triple A games alike, enjoying the storyline along the way. Comfort hobby"},
         {"name": "Story Writing", "desc": "Composing stories for both my future game development career and personal interests."},
-        {"name": "Game Development", "desc": "Developing 2D (soon 3D) games using a variety of different engine."},
-        {"name": "Music & Audio", "desc": "Listening to a variety of genres and discovering new artists."},
-        {"name": "Working out", "desc": "Building my physique like they say, a healthy body equals a healthy mind."}
+        {"name": "Game Development", "desc": "Developing 2D (soon 3D) games using a variety of different engine. Still learning from the ground up"},
+        {"name": "Music & Audio", "desc": "Listening to a variety of genres and discovering new artists. Really gets me through rough days"},
+        {"name": "Working out", "desc": "Building my physique like they say, a healthy body equals a healthy mind. Another personal favorite hobby of mine."}
     ],
     
     # ── Skills (Used for Chart & Table) ──
@@ -51,34 +52,41 @@ CONFIG = {
     "PROJECTS": [
         {
             "title": "AnchorPod",
-            "role": "Lead Developer",
+            "role": "Full-Stack Developer",
             "status": "In Progress",
             "tools": "Python, Django, Supabase, HTML, CSS, JS",
             "outcome": "A community-driven, anonymous accountability platform designed to combat academic burnout and student isolation through shared daily self-care rhythms.",
             "link": "https://github.com/eitophetamine9/AnchorPod"
         },
         {
-            "title": "Project Beta: Student Grade & Attendance Portal",
+            "title": "Spirit Contract Evo | Idle",
             "role": "Full-Stack Developer",
-            "status": "Completed",
-            "tools": "Python, SQLite, Pandas",
-            "outcome": "Streamlined semester records for over 200 students with instant CSV reporting.",
-            "link": "https://github.com"
+            "status": "In Progress",
+            "tools": "HTML, JS, Pixi.js, Vite",
+            "outcome": "A mobile-first, dark fantasy Idle RPG built with vanilla JavaScript (ES2022+), Pixi.js 2.5D viewports, and reactive state management.",
+            "link": "https://github.com/eitophetamine9/SpiritContractEvoIdle"
         },
         {
-            "title": "Project Gamma: Campus FAQ Chatbot",
-            "role": "NLP Developer",
+            "title": "Phlegmatic",
+            "role": "Full-Stack Developer",
+            "status": "In Progress",
+            "tools": "C++, Raylib, CMake",
+            "outcome": "A top-down view 2D RPG built in C++ and Raylib.",
+            "link": "https://github.com/eitophetamine9/Phlegmatic"
+        },
+        {
+            "title": "Luck in the Dungeon",
+            "role": "Lead Developer",
             "status": "Completed",
-            "tools": "Streamlit, OpenAI API, LangChain",
-            "outcome": "Handled 1,000+ student queries with 90% positive feedback during enrollment week.",
-            "link": "https://github.com"
+            "tools": "Java, Java Swing",
+            "outcome": "A Java-based puzzle game with gacha / rng elements involved needed for progression.",
+            "link": "https://github.com/eitophetamine9/Luck-in-the-Dungeon"
         }
     ]
 }
 
-# ==============================================================================
 # STREAMLIT APP CONFIG & SMOOTH SCROLLING
-# ==============================================================================
+
 st.set_page_config(
     page_title=f"{CONFIG['NAME']} | Portfolio",
     layout="wide"
@@ -135,6 +143,28 @@ html {
     border-radius: 10px;
     padding: 16px;
     margin-bottom: 12px;
+}
+.proj-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    min-height: 3.2rem;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.3rem;
+}
+.proj-tools {
+    min-height: 2.8rem;
+    margin-bottom: 0.5rem;
+}
+.proj-outcome {
+    background: rgba(30, 58, 138, 0.25);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 8px;
+    padding: 10px 12px;
+    min-height: 120px;
+    margin-bottom: 15px;
+    font-size: 0.88rem;
+    color: #e2e8f0;
 }
 </style>
 
@@ -196,10 +226,9 @@ with col_intro:
     st.write(CONFIG["BIO"])
     
     # Required Extra: Metrics
-    m1, m2, m3 = st.columns(3)
-    m1.metric("Projects Completed", len(CONFIG["PROJECTS"]))
-    m2.metric("Tracked Skills", len(CONFIG["SKILLS"]))
-    m3.metric("Status", "Active Student")
+    m1, m2 = st.columns(2)
+    m1.metric("Projects", len(CONFIG["PROJECTS"]))
+    m2.metric("Status", "Active Student")
 
 st.divider()
 
@@ -276,25 +305,30 @@ st.write("A collection of practical projects showcasing applied AI and developme
 # Required Widget: Radio filter
 proj_view = st.radio("Display view:", ["All Projects", "Featured Only"], horizontal=True)
 
-# Grid layout with at least 3 projects
-proj_cols = st.columns(len(CONFIG["PROJECTS"]))
-for idx, proj in enumerate(CONFIG["PROJECTS"]):
-    with proj_cols[idx]:
-        with st.container(border=True):
-            st.subheader(proj["title"])
-            st.markdown(f"**Status:** `{proj.get('status', 'Completed')}`")
-            st.markdown(f"**Role:** `{proj['role']}`")
-            st.markdown(f"**Tools:** `{proj['tools']}`")
-            st.info(f"**Outcome:** {proj['outcome']}")
-            st.link_button("View Project", proj["link"], use_container_width=True)
+# 2x2 grid layout with uniform box heights
+displayed_projects = CONFIG["PROJECTS"]
+if proj_view == "Featured Only":
+    featured = [p for p in CONFIG["PROJECTS"] if p.get("status") == "Completed" or "AnchorPod" in p.get("title", "")]
+    if featured:
+        displayed_projects = featured
+
+for row_idx in range(0, len(displayed_projects), 2):
+    row_projects = displayed_projects[row_idx:row_idx + 2]
+    cols = st.columns(2)
+    for col_idx, proj in enumerate(row_projects):
+        with cols[col_idx]:
+            with st.container(border=True):
+                st.markdown(f'<div class="proj-title">{proj["title"]}</div>', unsafe_allow_html=True)
+                st.markdown(f"**Status:** `{proj.get('status', 'Completed')}`")
+                st.markdown(f"**Role:** `{proj['role']}`")
+                st.markdown(f'<div class="proj-tools"><strong>Tools:</strong> <code>{proj["tools"]}</code></div>', unsafe_allow_html=True)
+                st.markdown(f'<div class="proj-outcome"><strong>Outcome:</strong> {proj["outcome"]}</div>', unsafe_allow_html=True)
+                st.link_button("View Project", proj["link"], use_container_width=True)
 
 st.divider()
 
 # GITHUB & CONTRIBUTION CHARTS
 st.markdown('<div id="github" class="section-anchor"></div>', unsafe_allow_html=True)
-st.header("GitHub Contributions")
-st.write(f"Commit heatmap and live activity for **[@{CONFIG['GITHUB_USERNAME']}]({CONFIG['GITHUB_URL']})**.")
-
 # Real live GitHub contribution heatmap
 chart_url = f"https://ghchart.rshah.org/40c463/{CONFIG['GITHUB_USERNAME']}"
 st.markdown(
