@@ -96,33 +96,33 @@ CONFIG = {
     # ── Certificates ──
     "CERTIFICATES": [
         {
-            "title": "Certificate of Achievement",
-            "issuer": "Platform / Organization",
-            "date": "2024",
-            "image": "assets/cert1.png",  # Save image in assets/
-            "description": "Description of the certificate, course, or competition honor."
-        },
-        {
-            "title": "Cybersecurity / Course Credential",
-            "issuer": "Issuing Body",
+            "title": "C Certification",
+            "issuer": "CodeChum",
             "date": "2025",
-            "image": "assets/cert2.png",  # Save image in assets/
-            "description": "Details about completed training, coursework, or hands-on labs."
+            "image": "assets/cert3.png",  
+            "description": "Award."
         },
         {
-            "title": "Programming & Development Certificate",
-            "issuer": "Platform / University",
+            "title": "Java Certification",
+            "issuer": "CodeChum",
             "date": "2025",
-            "image": "assets/cert3.png",  # Save image in assets/
-            "description": "Demonstrated technical skills in software engineering and development."
+            "image": "assets/cert2.png", 
+            "description": "Award."
         },
         {
-            "title": "Specialized Workshop / Hackathon Honor",
-            "issuer": "Event Organizer / Institution",
+            "title": "PSITE - Cebu ICT Student Congress 2026",
+            "issuer": "PSIT Central Visayas",
             "date": "2026",
-            "image": "assets/cert4.png",  # Save image in assets/
-            "description": "Recognition for participation, innovation, or excellence."
-        }
+            "image": "assets/cert4.png",  
+            "description": "Participant."
+        },
+        {
+            "title": "OWASP - Cybersecurity APEX 2026",
+            "issuer": "OWASP",
+            "date": "2026",
+            "image": "assets/cert1.png",  
+            "description": "Participant."
+        },
     ]
 }
 
