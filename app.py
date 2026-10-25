@@ -81,6 +81,14 @@ CONFIG = {
             "tools": "Java, Java Swing",
             "outcome": "A Java-based puzzle game with gacha / rng elements involved needed for progression.",
             "link": "https://github.com/eitophetamine9/Luck-in-the-Dungeon"
+        },
+        {
+            "title": "CyberType",
+            "role": "Lead Developer",
+            "status": "Completed",
+            "tools": "C#, Blazor WebApp, TailwindCSS",
+            "outcome": "A browser-based, run-based survival typing game built with Blazor WebAssembly (.NET 10), pure C# game loops, and Tailwind CSS v4 styling.",
+            "link": "https://github.com/eitophetamine9/MidtermAppDev"
         }
     ]
 }
@@ -89,12 +97,35 @@ CONFIG = {
 
 st.set_page_config(
     page_title=f"{CONFIG['NAME']} | Portfolio",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="collapsed"
 )
 
 # Smooth scrolling animation & clean styling
 st.markdown("""
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* Modern Typography */
+html, body, [class*="css"], [data-testid="stAppViewContainer"], .stMarkdown, .stText, p, div, span, label, input, button, select, textarea {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    letter-spacing: -0.01em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.025em !important;
+}
+
+code, kbd, samp, pre {
+    font-family: 'JetBrains Mono', monospace !important;
+}
+
+/* Hide sidebar completely */
+[data-testid="stSidebar"], [data-testid="collapsedControl"] {
+    display: none !important;
+}
 html {
     scroll-behavior: smooth !important;
 }
@@ -182,23 +213,6 @@ html {
 if "feedback_list" not in st.session_state:
     st.session_state.feedback_list = []
 
-# SIDEBAR
-with st.sidebar:
-    st.markdown(f"### {CONFIG['NAME']}")
-    st.caption(f"**Section:** {CONFIG['SECTION']}")
-    st.caption(f"**Program:** {CONFIG['PROGRAM_YEAR']}")
-    st.divider()
-    
-    st.markdown("#### Quick Navigation")
-    st.markdown("- [About Me](#about)")
-    st.markdown("- [Autobiography & Hobbies](#autobiography)")
-    st.markdown("- [Skills Matrix](#skills)")
-    st.markdown("- [Featured Projects](#projects)")
-    st.markdown("- [GitHub Activity](#github)")
-    st.markdown("- [Contact Form](#contact)")
-    
-    st.divider()
-    st.link_button("Open GitHub Profile", CONFIG["GITHUB_URL"], use_container_width=True)
 
 # ABOUT ME
 st.markdown('<div id="about" class="section-anchor"></div>', unsafe_allow_html=True)
