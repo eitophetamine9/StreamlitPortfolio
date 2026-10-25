@@ -1,64 +1,66 @@
 import streamlit as st
 import pandas as pd
+import os
 
-# ==============================================================================
-# 🛠️ EDIT YOUR DETAILS HERE
-# ==============================================================================
 CONFIG = {
     # ── Basic Student Info (Rubric Requirement) ──
-    "NAME": "Your Name Here",                            # TODO: Your full name
-    "SECTION": "CSIT 349 - Section 3A",                  # TODO: Your course & section
-    "PROGRAM_YEAR": "BS Information Technology, 3rd Year",# TODO: Your program & year
-    "GITHUB_USERNAME": "torvalds",                      # TODO: Your GitHub username (shows your live chart!)
-    "GITHUB_URL": "https://github.com/torvalds",        # TODO: Your GitHub profile URL
-    "BIO": "Write a 2-3 sentence introduction about who you are, your passion for tech, and what drives you.",
-    "PHOTO_URL": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80",
+    "NAME": "John Erick I. Santizo",
+    "SECTION": "CSIT 349 - F1",
+    "PROGRAM_YEAR": "BS Computer Science, 3rd Year",
+    "GITHUB_USERNAME": "eitophetamine9",                      
+    "GITHUB_URL": "https://github.com/eitophetamine9",       
+    "BIO": "I am an aspiring cybersecurity analyst, full-stack developer, and game developer with a passion for technology and innovation.",
+    "PHOTO_URL": "assets/profile.png",
     
     # ── Autobiography ──
     "BACKGROUND": (
-        "Share your background story here: how you first got into computers/technology, "
-        "what inspired you to pursue this path, and what topics excite you most today."
+        "Growing up I've always been exposed to technology, more specifically a PC,"
+        "that inspired me to delve deeper into technology on how it works and what I could build with it."
     ),
     "EDUCATION": [
-        {"level": "College", "school": "Your University / College", "period": "2022 - Present", "details": "BS Information Technology"},
-        {"level": "Senior High", "school": "Your High School", "period": "2020 - 2022", "details": "STEM Strand / Honors"}
+        {"level": "College", "school": "Cebu Institute of Technology - University", "period": "2024 - Present", "details": "BS Computer Science"},
+        {"level": "Senior High", "school": "University of Cebu - METC", "period": "2021 - 2024", "details": "STEM Strand / Honors"}
     ],
     "MILESTONES": [
-        {"year": "2022", "event": "Started university journey and wrote my first programs in Python."},
-        {"year": "2023", "event": "Built my first full-stack web project and participated in a student hackathon."},
-        {"year": "2024", "event": "Began learning Applied AI and exploring machine learning models."}
+        {"year": "2024-2025", "event": "Parangal Academic Achiever"},
+        {"year": "2026", "event": "Game Gauntlet - Sim Jam Participant"},
+        {"year": "2026", "event": "First solo game development project - Spirit Contract Evo Idle "},
     ],
 
     # ── Hobbies ──
     "HOBBIES": [
-        {"name": "Gaming", "icon": "🎮", "desc": "Playing strategy and story-rich indie games in my spare time."},
-        {"name": "Photography", "icon": "📷", "desc": "Capturing street landscapes and architectural details."},
-        {"name": "Music & Audio", "icon": "🎧", "desc": "Listening to synthwave and experimenting with digital audio production."},
-        {"name": "Cycling", "icon": "🚲", "desc": "Weekend rides to explore scenic trails and stay active."}
+        {"name": "Gaming", "desc": "Playing indie and triple A games alike, enjoying the storyline along the way"},
+        {"name": "Story Writing", "desc": "Composing stories for both my future game development career and personal interests."},
+        {"name": "Game Development", "desc": "Developing 2D (soon 3D) games using a variety of different engine."},
+        {"name": "Music & Audio", "desc": "Listening to a variety of genres and discovering new artists."},
+        {"name": "Working out", "desc": "Building my physique like they say, a healthy body equals a healthy mind."}
     ],
     
     # ── Skills (Used for Chart & Table) ──
     "SKILLS": [
-        {"Skill": "Python", "Category": "Languages", "Proficiency": 90},
-        {"Skill": "Streamlit", "Category": "Frameworks", "Proficiency": 85},
-        {"Skill": "SQL", "Category": "Databases", "Proficiency": 75},
+        {"Skill": "Python", "Category": "Languages", "Proficiency": 60},
+        {"Skill": "C++", "Category": "Languages", "Proficiency": 75},
+        {"Skill": "Java", "Category": "Languages", "Proficiency": 80},
+        {"Skill": "SQL", "Category": "Databases", "Proficiency": 70},
         {"Skill": "Git & GitHub", "Category": "Tools", "Proficiency": 80},
-        {"Skill": "Data Analysis", "Category": "AI / Data", "Proficiency": 82},
-        {"Skill": "HTML & CSS", "Category": "Languages", "Proficiency": 78}
+        {"Skill": "Data Analysis", "Category": "AI / Data", "Proficiency": 65},
+        {"Skill": "HTML & CSS", "Category": "Languages", "Proficiency": 70},
     ],
 
     # ── Projects (At least 3 required) ──
     "PROJECTS": [
         {
-            "title": "Project Alpha: AI Crop Disease Classifier",
+            "title": "AnchorPod",
             "role": "Lead Developer",
-            "tools": "Python, PyTorch, Streamlit",
-            "outcome": "Achieved 95% accuracy and deployed interactive diagnosis tool for local farmers.",
-            "link": "https://github.com"
+            "status": "In Progress",
+            "tools": "Python, Django, Supabase, HTML, CSS, JS",
+            "outcome": "A community-driven, anonymous accountability platform designed to combat academic burnout and student isolation through shared daily self-care rhythms.",
+            "link": "https://github.com/eitophetamine9/AnchorPod"
         },
         {
             "title": "Project Beta: Student Grade & Attendance Portal",
             "role": "Full-Stack Developer",
+            "status": "Completed",
             "tools": "Python, SQLite, Pandas",
             "outcome": "Streamlined semester records for over 200 students with instant CSV reporting.",
             "link": "https://github.com"
@@ -66,6 +68,7 @@ CONFIG = {
         {
             "title": "Project Gamma: Campus FAQ Chatbot",
             "role": "NLP Developer",
+            "status": "Completed",
             "tools": "Streamlit, OpenAI API, LangChain",
             "outcome": "Handled 1,000+ student queries with 90% positive feedback during enrollment week.",
             "link": "https://github.com"
@@ -74,11 +77,10 @@ CONFIG = {
 }
 
 # ==============================================================================
-# ⚙️ STREAMLIT APP CONFIG & SMOOTH SCROLLING
+# STREAMLIT APP CONFIG & SMOOTH SCROLLING
 # ==============================================================================
 st.set_page_config(
     page_title=f"{CONFIG['NAME']} | Portfolio",
-    page_icon="🚀",
     layout="wide"
 )
 
@@ -137,12 +139,12 @@ html {
 </style>
 
 <div class="top-nav">
-    <a href="#about">👤 About</a>
-    <a href="#autobiography">📖 Autobiography</a>
-    <a href="#skills">⚡ Skills</a>
-    <a href="#projects">💼 Projects</a>
-    <a href="#github">🐙 GitHub</a>
-    <a href="#contact">📬 Contact</a>
+    <a href="#about">About</a>
+    <a href="#autobiography">Autobiography</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#github">GitHub</a>
+    <a href="#contact">Contact</a>
 </div>
 """, unsafe_allow_html=True)
 
@@ -150,16 +152,14 @@ html {
 if "feedback_list" not in st.session_state:
     st.session_state.feedback_list = []
 
-# ==============================================================================
-# 📌 SIDEBAR
-# ==============================================================================
+# SIDEBAR
 with st.sidebar:
-    st.markdown(f"### 👨‍💻 {CONFIG['NAME']}")
+    st.markdown(f"### {CONFIG['NAME']}")
     st.caption(f"**Section:** {CONFIG['SECTION']}")
     st.caption(f"**Program:** {CONFIG['PROGRAM_YEAR']}")
     st.divider()
     
-    st.markdown("#### ⚡ Quick Navigation")
+    st.markdown("#### Quick Navigation")
     st.markdown("- [About Me](#about)")
     st.markdown("- [Autobiography & Hobbies](#autobiography)")
     st.markdown("- [Skills Matrix](#skills)")
@@ -168,17 +168,26 @@ with st.sidebar:
     st.markdown("- [Contact Form](#contact)")
     
     st.divider()
-    st.link_button("🌐 Open GitHub Profile", CONFIG["GITHUB_URL"], use_container_width=True)
+    st.link_button("Open GitHub Profile", CONFIG["GITHUB_URL"], use_container_width=True)
 
-# ==============================================================================
-# 👤 1. ABOUT ME
-# ==============================================================================
+# ABOUT ME
 st.markdown('<div id="about" class="section-anchor"></div>', unsafe_allow_html=True)
 
 col_photo, col_intro = st.columns([1, 2.5], gap="medium")
 
 with col_photo:
-    st.image(CONFIG["PHOTO_URL"], caption=f"{CONFIG['NAME']} (Photo stand-in)", use_container_width=True)
+    photo_src = CONFIG.get("PHOTO_URL", "assets/profile.png")
+    if os.path.exists(photo_src):
+        st.image(photo_src, caption=CONFIG["NAME"], use_container_width=True)
+    elif photo_src.startswith("http://") or photo_src.startswith("https://"):
+        st.image(photo_src, caption=CONFIG["NAME"], use_container_width=True)
+    else:
+        # Fallback placeholder if local photo is not yet in assets/
+        st.image(
+            "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80",
+            caption=f"{CONFIG['NAME']} (Place image at {photo_src})",
+            use_container_width=True
+        )
 
 with col_intro:
     st.markdown(f'<span class="tag-badge">{CONFIG["SECTION"]}</span>', unsafe_allow_html=True)
@@ -194,14 +203,12 @@ with col_intro:
 
 st.divider()
 
-# ==============================================================================
-# 📖 2. AUTOBIOGRAPHY & HOBBIES
-# ==============================================================================
+# AUTOBIOGRAPHY & HOBBIES
 st.markdown('<div id="autobiography" class="section-anchor"></div>', unsafe_allow_html=True)
-st.header("📖 Autobiography & Interests")
+st.header("Autobiography & Interests")
 
 # Required Extra: Tabs
-tab_bio, tab_edu, tab_hobbies = st.tabs(["🌟 Background", "🎓 Education & Milestones", "✨ Hobbies & Interests"])
+tab_bio, tab_edu, tab_hobbies = st.tabs(["Background", "Education & Milestones", "Hobbies & Interests"])
 
 with tab_bio:
     st.subheader("My Story")
@@ -224,17 +231,14 @@ with tab_hobbies:
     for i, h in enumerate(CONFIG["HOBBIES"]):
         with hob_cols[i]:
             with st.container(border=True):
-                st.markdown(f"### {h['icon']}")
                 st.markdown(f"**{h['name']}**")
                 st.caption(h["desc"])
 
 st.divider()
 
-# ==============================================================================
-# ⚡ 3. SKILLS MATRIX
-# ==============================================================================
+# SKILLS MATRIX
 st.markdown('<div id="skills" class="section-anchor"></div>', unsafe_allow_html=True)
-st.header("⚡ Skills & Technical Proficiency")
+st.header("Skills & Technical Proficiency")
 
 df_skills = pd.DataFrame(CONFIG["SKILLS"])
 
@@ -264,11 +268,9 @@ if show_table:
 
 st.divider()
 
-# ==============================================================================
-# 💼 4. FEATURED PROJECTS
-# ==============================================================================
+# FEATURED PROJECTS
 st.markdown('<div id="projects" class="section-anchor"></div>', unsafe_allow_html=True)
-st.header("💼 Featured Projects")
+st.header("Featured Projects")
 st.write("A collection of practical projects showcasing applied AI and development skills.")
 
 # Required Widget: Radio filter
@@ -280,18 +282,17 @@ for idx, proj in enumerate(CONFIG["PROJECTS"]):
     with proj_cols[idx]:
         with st.container(border=True):
             st.subheader(proj["title"])
+            st.markdown(f"**Status:** `{proj.get('status', 'Completed')}`")
             st.markdown(f"**Role:** `{proj['role']}`")
             st.markdown(f"**Tools:** `{proj['tools']}`")
             st.info(f"**Outcome:** {proj['outcome']}")
-            st.link_button("🔗 View Project", proj["link"], use_container_width=True)
+            st.link_button("View Project", proj["link"], use_container_width=True)
 
 st.divider()
 
-# ==============================================================================
-# 🐙 5. GITHUB & CONTRIBUTION CHARTS
-# ==============================================================================
+# GITHUB & CONTRIBUTION CHARTS
 st.markdown('<div id="github" class="section-anchor"></div>', unsafe_allow_html=True)
-st.header("🐙 GitHub Contributions")
+st.header("GitHub Contributions")
 st.write(f"Commit heatmap and live activity for **[@{CONFIG['GITHUB_USERNAME']}]({CONFIG['GITHUB_URL']})**.")
 
 # Real live GitHub contribution heatmap
@@ -307,11 +308,9 @@ st.markdown(
 
 st.divider()
 
-# ==============================================================================
-# 📬 6. CONTACT & FEEDBACK FORM
-# ==============================================================================
+# CONTACT & FEEDBACK FORM
 st.markdown('<div id="contact" class="section-anchor"></div>', unsafe_allow_html=True)
-st.header("📬 Contact & Feedback")
+st.header("Contact & Feedback")
 st.write("Leave feedback or send a message. This form responds immediately upon submission.")
 
 # Required Extra: Form & Session State
@@ -328,17 +327,14 @@ with st.form("contact_form", clear_on_submit=True):
             st.error("Please fill out all required fields.")
         else:
             st.session_state.feedback_list.append({"name": sender_name, "message": sender_msg})
-            st.balloons()
             st.success(f"Thank you, {sender_name}! Your message has been received.")
 
-# ==============================================================================
-# 🏁 FOOTER
-# ==============================================================================
+# FOOTER
 st.markdown(
     f"""
     <div style="text-align: center; color: #64748b; padding-top: 30px; font-size: 0.85rem;">
         <p><strong>{CONFIG['NAME']}</strong> &bull; {CONFIG['SECTION']} &bull; Built with Streamlit</p>
-        <p><a href="#about" style="color: #3b82f6; text-decoration: none;">⬆️ Back to Top</a></p>
+        <p><a href="#about" style="color: #3b82f6; text-decoration: none;">Back to Top</a></p>
     </div>
     """,
     unsafe_allow_html=True
