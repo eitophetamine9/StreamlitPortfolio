@@ -2,7 +2,7 @@ import streamlit as st
 import os
 
 def render_sidebar(config):
-    """Renders a subtle, non-intrusive sidebar satisfying the rubric requirement."""
+    """Renders a subtle, non-intrusive sidebar."""
     with st.sidebar:
         # Profile thumbnail if available
         if os.path.exists(config.get("PHOTO_URL", "")):

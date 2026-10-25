@@ -6,22 +6,7 @@ def apply_custom_styles():
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
-    /* 1. Guarantee that raw text ligature strings NEVER display */
-    [data-testid="stExpandSidebarButton"] span,
-    [data-testid="stSidebarCollapseButton"] span,
-    header button[aria-label="Expand sidebar"] span,
-    button[aria-label="Collapse sidebar"] span {
-        display: none !important;
-        font-size: 0 !important;
-        width: 0 !important;
-        height: 0 !important;
-        line-height: 0 !important;
-        color: transparent !important;
-        visibility: hidden !important;
-        overflow: hidden !important;
-    }
-
-    /* 2. Style Expand sidebar button with guaranteed SVG double chevron */
+    /* 1. Sidebar Toggle Buttons: Display >> and << */
     [data-testid="stExpandSidebarButton"],
     header button[aria-label="Expand sidebar"] {
         display: inline-flex !important;
@@ -35,26 +20,36 @@ def apply_custom_styles():
         position: relative !important;
     }
 
-    [data-testid="stExpandSidebarButton"]::before,
-    header button[aria-label="Expand sidebar"]::before {
-        content: "" !important;
-        display: block !important;
-        width: 20px !important;
-        height: 20px !important;
-        background-repeat: no-repeat !important;
-        background-position: center !important;
-        background-size: contain !important;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='13 17 18 12 13 7'/%3E%3Cpolyline points='6 17 11 12 6 7'/%3E%3C/svg%3E") !important;
-        transition: transform 0.2s ease, filter 0.2s ease !important;
+    [data-testid="stExpandSidebarButton"] span,
+    header button[aria-label="Expand sidebar"] span {
+        display: none !important;
+        font-size: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+        line-height: 0 !important;
+        color: transparent !important;
+        visibility: hidden !important;
     }
 
-    [data-testid="stExpandSidebarButton"]:hover::before,
-    header button[aria-label="Expand sidebar"]:hover::before {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2360a5fa' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='13 17 18 12 13 7'/%3E%3Cpolyline points='6 17 11 12 6 7'/%3E%3C/svg%3E") !important;
-        transform: scale(1.1) !important;
+    [data-testid="stExpandSidebarButton"]::after,
+    header button[aria-label="Expand sidebar"]::after {
+        content: ">>" !important;
+        font-family: 'JetBrains Mono', Consolas, monospace !important;
+        font-size: 1.15rem !important;
+        font-weight: 700 !important;
+        color: #94a3b8 !important;
+        letter-spacing: -2px !important;
+        line-height: 1 !important;
+        display: inline-block !important;
+        transition: color 0.2s ease, transform 0.2s ease !important;
     }
 
-    /* 3. Style Collapse sidebar button with guaranteed SVG double chevron */
+    [data-testid="stExpandSidebarButton"]:hover::after,
+    header button[aria-label="Expand sidebar"]:hover::after {
+        color: #60a5fa !important;
+        transform: scale(1.15) !important;
+    }
+
     [data-testid="stSidebarCollapseButton"] button,
     button[aria-label="Collapse sidebar"] {
         display: inline-flex !important;
@@ -68,23 +63,45 @@ def apply_custom_styles():
         position: relative !important;
     }
 
-    [data-testid="stSidebarCollapseButton"] button::before,
-    button[aria-label="Collapse sidebar"]::before {
-        content: "" !important;
-        display: block !important;
-        width: 20px !important;
-        height: 20px !important;
-        background-repeat: no-repeat !important;
-        background-position: center !important;
-        background-size: contain !important;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='11 17 6 12 11 7'/%3E%3Cpolyline points='18 17 13 12 18 7'/%3E%3C/svg%3E") !important;
-        transition: transform 0.2s ease, filter 0.2s ease !important;
+    [data-testid="stSidebarCollapseButton"] button span,
+    button[aria-label="Collapse sidebar"] span {
+        display: none !important;
+        font-size: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+        line-height: 0 !important;
+        color: transparent !important;
+        visibility: hidden !important;
     }
 
-    [data-testid="stSidebarCollapseButton"] button:hover::before,
-    button[aria-label="Collapse sidebar"]:hover::before {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2360a5fa' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='11 17 6 12 11 7'/%3E%3Cpolyline points='18 17 13 12 18 7'/%3E%3C/svg%3E") !important;
-        transform: scale(1.1) !important;
+    [data-testid="stSidebarCollapseButton"] button::after,
+    button[aria-label="Collapse sidebar"]::after {
+        content: "<<" !important;
+        font-family: 'JetBrains Mono', Consolas, monospace !important;
+        font-size: 1.15rem !important;
+        font-weight: 700 !important;
+        color: #94a3b8 !important;
+        letter-spacing: -2px !important;
+        line-height: 1 !important;
+        display: inline-block !important;
+        transition: color 0.2s ease, transform 0.2s ease !important;
+    }
+
+    [data-testid="stSidebarCollapseButton"] button:hover::after,
+    button[aria-label="Collapse sidebar"]:hover::after {
+        color: #60a5fa !important;
+        transform: scale(1.15) !important;
+    }
+
+    /* Zero-size helper for background DOM script iframe */
+    [data-testid="stCustomComponentV1"] {
+        position: fixed !important;
+        top: -9999px !important;
+        left: -9999px !important;
+        width: 0 !important;
+        height: 0 !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
     }
 
     /* Modern Typography - scoped to content and text elements */
@@ -237,6 +254,35 @@ def apply_custom_styles():
     }
     </style>
     """, unsafe_allow_html=True)
+
+    import streamlit.components.v1 as components
+    components.html("""
+    <script>
+    function patchSidebarIcons() {
+        try {
+            const pDoc = window.parent.document;
+            // 1. Expand sidebar button (collapsed state) -> >>
+            const expSpans = pDoc.querySelectorAll('[data-testid="stExpandSidebarButton"] span, button[aria-label="Expand sidebar"] span');
+            expSpans.forEach(s => {
+                if (s.textContent !== '>>') {
+                    s.textContent = '>>';
+                    s.innerText = '>>';
+                }
+            });
+            // 2. Collapse sidebar button (expanded state) -> <<
+            const colSpans = pDoc.querySelectorAll('[data-testid="stSidebarCollapseButton"] span, button[aria-label="Collapse sidebar"] span');
+            colSpans.forEach(s => {
+                if (s.textContent !== '<<') {
+                    s.textContent = '<<';
+                    s.innerText = '<<';
+                }
+            });
+        } catch(e) {}
+    }
+    patchSidebarIcons();
+    setInterval(patchSidebarIcons, 200);
+    </script>
+    """, height=0)
 
 
 def render_top_navbar():
