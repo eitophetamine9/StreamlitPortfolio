@@ -15,21 +15,12 @@ Explore the complete interactive application, live data charts, project breakdow
 
 ---
 
-## Tech Stack & Tools
+## Built With
 
 Click on any badge below to view the official documentation:
 
 [![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=Streamlit&logoColor=white)](https://streamlit.io/)
-[![C++](https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white)](https://isocpp.org/)
-[![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.java.com/)
-[![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white)](https://learn.microsoft.com/en-us/dotnet/csharp/)
-[![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white)](https://www.djangoproject.com/)
-[![Raylib](https://img.shields.io/badge/Raylib-555555?style=for-the-badge&logo=raylib&logoColor=white)](https://www.raylib.com/)
-[![Pixi.js](https://img.shields.io/badge/Pixi.js-E72264?style=for-the-badge&logo=pixijs&logoColor=white)](https://pixijs.com/)
-[![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
 
 ---
 
@@ -51,16 +42,3 @@ streamlit run app.py
 ```
 
 Access the local server at `http://localhost:8501`.
-
----
-
-## Option B: Deployment Guide
-
-1. Push this repository to GitHub:
-   ```powershell
-   git remote add origin https://github.com/eitophetamine9/<REPO_NAME>.git
-   git branch -M main
-   git push -u origin main
-   ```
-2. Log into [share.streamlit.io](https://share.streamlit.io) with GitHub.
-3. Select your repository, set the main file path to `app.py`, and click Deploy.
