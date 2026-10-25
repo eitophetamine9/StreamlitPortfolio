@@ -2,7 +2,7 @@
 
 An interactive, responsive portfolio and autobiography application built with Streamlit for **CSIT 349 - Applied AI (Section F1)** at Cebu Institute of Technology - University.
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io)
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://santizo-portfolio.streamlit.app/)
 [![GitHub Profile](https://img.shields.io/badge/GitHub-Profile-181717?style=flat&logo=github)](https://github.com/eitophetamine9)
 
 ---
@@ -11,7 +11,7 @@ An interactive, responsive portfolio and autobiography application built with St
 
 Explore the complete interactive application, live data charts, project breakdowns, and accredited credentials:
 
-**[Launch Live Streamlit Application](https://share.streamlit.io)**
+**[Launch Live Streamlit Application](https://santizo-portfolio.streamlit.app/)**
 
 ---
 
