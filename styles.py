@@ -4,7 +4,7 @@ def apply_custom_styles():
     """Injects modern Plus Jakarta Sans typography, dark slate theme, and smooth scroll styles."""
     st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
 
     /* Modern Typography */
     html, body, [data-testid="stAppViewContainer"], .stMarkdown, .stText, p, label, input, select, textarea {
@@ -18,17 +18,39 @@ def apply_custom_styles():
         letter-spacing: -0.025em !important;
     }
 
-    /* Preserve Material Symbols & Icons so ligatures render as icons, not text */
-    [data-testid="stIconMaterial"], 
-    .material-symbols-rounded, 
-    .material-icons, 
-    [class*="material-symbols"], 
-    [class*="material-icons"],
+    /* Completely eliminate double_arrow_right text leak by hiding raw ligature text */
     [data-testid="collapsedControl"] span,
+    [data-testid="stSidebarCollapsedControl"] span,
     [data-testid="stSidebarCollapseButton"] span {
-        font-family: 'Material Symbols Rounded', 'Material Icons', sans-serif !important;
-        letter-spacing: normal !important;
-        text-transform: none !important;
+        font-size: 0 !important;
+        line-height: 0 !important;
+        visibility: hidden !important;
+        display: none !important;
+    }
+
+    /* Render a clean visual arrow instead of broken text */
+    [data-testid="collapsedControl"] button::after,
+    [data-testid="stSidebarCollapsedControl"] button::after,
+    [data-testid="collapsedControl"]::after,
+    [data-testid="stSidebarCollapsedControl"]::after {
+        content: "»" !important;
+        font-size: 1.3rem !important;
+        font-weight: 800 !important;
+        color: #60a5fa !important;
+        visibility: visible !important;
+        display: block !important;
+        text-align: center !important;
+    }
+
+    [data-testid="stSidebarCollapseButton"] button::after,
+    [data-testid="stSidebarCollapseButton"]::after {
+        content: "«" !important;
+        font-size: 1.3rem !important;
+        font-weight: 800 !important;
+        color: #60a5fa !important;
+        visibility: visible !important;
+        display: block !important;
+        text-align: center !important;
     }
 
     code, kbd, samp, pre {

@@ -26,7 +26,6 @@ def main():
     apply_custom_styles()
     render_top_navbar()
 
-    # ── Subtle Sidebar (Fulfills Rubric Component Requirement) ──
     render_sidebar(CONFIG)
 
     # ── Main Sections ──

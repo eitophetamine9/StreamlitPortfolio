@@ -4,7 +4,7 @@ def render_projects(config):
     """Renders the Featured Projects section in an equal-sized 2x2 grid."""
     st.markdown('<div id="projects" class="section-anchor"></div>', unsafe_allow_html=True)
     st.header("Featured Projects")
-    st.write("A collection of practical projects showcasing applied AI and development skills.")
+    st.write("A collection of personal and practical projects and development skills.")
 
     # Required Widget: Radio filter
     proj_view = st.radio("Display view:", ["All Projects", "Featured Only"], horizontal=True)
