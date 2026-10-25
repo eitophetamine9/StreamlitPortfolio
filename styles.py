@@ -7,7 +7,7 @@ def apply_custom_styles():
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
     /* Modern Typography */
-    html, body, [class*="css"], [data-testid="stAppViewContainer"], .stMarkdown, .stText, p, div, span, label, input, button, select, textarea {
+    html, body, [data-testid="stAppViewContainer"], .stMarkdown, .stText, p, label, input, select, textarea {
         font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
         letter-spacing: -0.01em;
     }
@@ -16,6 +16,19 @@ def apply_custom_styles():
         font-family: 'Plus Jakarta Sans', sans-serif !important;
         font-weight: 700 !important;
         letter-spacing: -0.025em !important;
+    }
+
+    /* Preserve Material Symbols & Icons so ligatures render as icons, not text */
+    [data-testid="stIconMaterial"], 
+    .material-symbols-rounded, 
+    .material-icons, 
+    [class*="material-symbols"], 
+    [class*="material-icons"],
+    [data-testid="collapsedControl"] span,
+    [data-testid="stSidebarCollapseButton"] span {
+        font-family: 'Material Symbols Rounded', 'Material Icons', sans-serif !important;
+        letter-spacing: normal !important;
+        text-transform: none !important;
     }
 
     code, kbd, samp, pre {

@@ -17,8 +17,6 @@ Explore the complete interactive application, live data charts, project breakdow
 
 ## Built With
 
-Click on any badge below to view the official documentation:
-
 [![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=Streamlit&logoColor=white)](https://streamlit.io/)
 
