@@ -108,6 +108,20 @@ CONFIG = {
             "date": "2025",
             "image": "assets/cert2.png",  # Save image in assets/
             "description": "Details about completed training, coursework, or hands-on labs."
+        },
+        {
+            "title": "Programming & Development Certificate",
+            "issuer": "Platform / University",
+            "date": "2025",
+            "image": "assets/cert3.png",  # Save image in assets/
+            "description": "Demonstrated technical skills in software engineering and development."
+        },
+        {
+            "title": "Specialized Workshop / Hackathon Honor",
+            "issuer": "Event Organizer / Institution",
+            "date": "2026",
+            "image": "assets/cert4.png",  # Save image in assets/
+            "description": "Recognition for participation, innovation, or excellence."
         }
     ]
 }
@@ -409,27 +423,29 @@ st.markdown('<div id="certificates" class="section-anchor"></div>', unsafe_allow
 st.header("Certificates & Achievements")
 st.write("Accredited certifications, workshop completions, and academic credentials.")
 
-cert_cols = st.columns(2)
-for idx, cert in enumerate(CONFIG["CERTIFICATES"]):
-    with cert_cols[idx % 2]:
-        with st.container(border=True):
-            img_path = cert.get("image", "")
-            if os.path.exists(img_path):
-                st.image(img_path, caption=cert["title"], use_container_width=True)
-            else:
-                # Elegant placeholder indicating where to place the image
-                st.markdown(
-                    f"""
-                    <div style="background: rgba(30, 41, 59, 0.4); border: 2px dashed rgba(59, 130, 246, 0.35); border-radius: 10px; padding: 40px 15px; text-align: center; margin-bottom: 12px;">
-                        <p style="color: #93c5fd; font-weight: 600; margin: 0 0 6px 0;">Certificate Image Stand-in</p>
-                        <p style="color: #64748b; font-size: 0.8rem; margin: 0;">Save image to <code>{img_path}</code></p>
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
-            st.subheader(cert["title"])
-            st.markdown(f"**Issuer:** `{cert['issuer']}` | **Date:** `{cert['date']}`")
-            st.caption(cert["description"])
+for row_idx in range(0, len(CONFIG["CERTIFICATES"]), 2):
+    row_certs = CONFIG["CERTIFICATES"][row_idx:row_idx + 2]
+    cols = st.columns(2)
+    for col_idx, cert in enumerate(row_certs):
+        with cols[col_idx]:
+            with st.container(border=True):
+                img_path = cert.get("image", "")
+                if os.path.exists(img_path):
+                    st.image(img_path, caption=cert["title"], use_container_width=True)
+                else:
+                    # Elegant placeholder indicating where to place the image
+                    st.markdown(
+                        f"""
+                        <div style="background: rgba(30, 41, 59, 0.4); border: 2px dashed rgba(59, 130, 246, 0.35); border-radius: 10px; padding: 40px 15px; text-align: center; margin-bottom: 12px;">
+                            <p style="color: #93c5fd; font-weight: 600; margin: 0 0 6px 0;">Certificate Image Stand-in</p>
+                            <p style="color: #64748b; font-size: 0.8rem; margin: 0;">Save image to <code>{img_path}</code></p>
+                        </div>
+                        """,
+                        unsafe_allow_html=True
+                    )
+                st.subheader(cert["title"])
+                st.markdown(f"**Issuer:** `{cert['issuer']}` | **Date:** `{cert['date']}`")
+                st.caption(cert["description"])
 
 st.divider()
 
