@@ -14,8 +14,9 @@ CONFIG = {
     
     # ── Autobiography ──
     "BACKGROUND": (
-        "Growing up I've always been exposed to technology, more specifically a PC,"
-        "that inspired me to delve deeper into technology on how it works and what I could build with it."
+        "Growing up I've always been exposed to technology, more specifically a PC, "
+        " that inspired me to delve deeper into technology on how it works and what I could build with it."
+        " I may not be the sharpest tool in the shed, but I am able to adapt to changes granted I put effort it."
     ),
     "EDUCATION": [
         {"level": "College", "school": "Cebu Institute of Technology - University", "period": "2024 - Present", "details": "BS Computer Science"},
@@ -89,6 +90,24 @@ CONFIG = {
             "tools": "C#, Blazor WebApp, TailwindCSS",
             "outcome": "A browser-based, run-based survival typing game built with Blazor WebAssembly (.NET 10), pure C# game loops, and Tailwind CSS v4 styling.",
             "link": "https://github.com/eitophetamine9/MidtermAppDev"
+        }
+    ],
+
+    # ── Certificates ──
+    "CERTIFICATES": [
+        {
+            "title": "Certificate of Achievement",
+            "issuer": "Platform / Organization",
+            "date": "2024",
+            "image": "assets/cert1.png",  # Save image in assets/
+            "description": "Description of the certificate, course, or competition honor."
+        },
+        {
+            "title": "Cybersecurity / Course Credential",
+            "issuer": "Issuing Body",
+            "date": "2025",
+            "image": "assets/cert2.png",  # Save image in assets/
+            "description": "Details about completed training, coursework, or hands-on labs."
         }
     ]
 }
@@ -247,6 +266,7 @@ button[data-baseweb="tab"] {
     <a href="#autobiography">Autobiography</a>
     <a href="#skills">Skills</a>
     <a href="#projects">Projects</a>
+    <a href="#certificates">Certificates</a>
     <a href="#github">GitHub</a>
     <a href="#contact">Contact</a>
 </div>
@@ -384,6 +404,35 @@ for row_idx in range(0, len(displayed_projects), 2):
 
 st.divider()
 
+# CERTIFICATES
+st.markdown('<div id="certificates" class="section-anchor"></div>', unsafe_allow_html=True)
+st.header("Certificates & Achievements")
+st.write("Accredited certifications, workshop completions, and academic credentials.")
+
+cert_cols = st.columns(2)
+for idx, cert in enumerate(CONFIG["CERTIFICATES"]):
+    with cert_cols[idx % 2]:
+        with st.container(border=True):
+            img_path = cert.get("image", "")
+            if os.path.exists(img_path):
+                st.image(img_path, caption=cert["title"], use_container_width=True)
+            else:
+                # Elegant placeholder indicating where to place the image
+                st.markdown(
+                    f"""
+                    <div style="background: rgba(30, 41, 59, 0.4); border: 2px dashed rgba(59, 130, 246, 0.35); border-radius: 10px; padding: 40px 15px; text-align: center; margin-bottom: 12px;">
+                        <p style="color: #93c5fd; font-weight: 600; margin: 0 0 6px 0;">Certificate Image Stand-in</p>
+                        <p style="color: #64748b; font-size: 0.8rem; margin: 0;">Save image to <code>{img_path}</code></p>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
+            st.subheader(cert["title"])
+            st.markdown(f"**Issuer:** `{cert['issuer']}` | **Date:** `{cert['date']}`")
+            st.caption(cert["description"])
+
+st.divider()
+
 # GITHUB & CONTRIBUTION CHARTS
 st.markdown('<div id="github" class="section-anchor"></div>', unsafe_allow_html=True)
 
@@ -412,24 +461,31 @@ st.divider()
 
 # CONTACT & FEEDBACK FORM
 st.markdown('<div id="contact" class="section-anchor"></div>', unsafe_allow_html=True)
-st.header("Contact & Feedback")
-st.write("Leave feedback or send a message. This form responds immediately upon submission.")
 
-# Required Extra: Form & Session State
-with st.form("contact_form", clear_on_submit=True):
-    sender_name = st.text_input("Your Name *")
-    sender_email = st.text_input("Your Email *")
-    sender_msg = st.text_area("Your Message *")
-    
-    # Required Widget: Button
-    btn_submit = st.form_submit_button("Send Message")
-    
-    if btn_submit:
-        if not sender_name.strip() or not sender_email.strip() or not sender_msg.strip():
-            st.error("Please fill out all required fields.")
-        else:
-            st.session_state.feedback_list.append({"name": sender_name, "message": sender_msg})
-            st.success(f"Thank you, {sender_name}! Your message has been received.")
+# Centered compact card layout
+c_left, c_center, c_right = st.columns([1, 2.2, 1])
+
+with c_center:
+    with st.container(border=True):
+        st.subheader("Contact & Feedback")
+        st.caption("Leave feedback or send a message. This form responds immediately upon submission.")
+        
+        with st.form("contact_form", clear_on_submit=True):
+            n_col, e_col = st.columns(2)
+            with n_col:
+                sender_name = st.text_input("Name *", placeholder="Your Name")
+            with e_col:
+                sender_email = st.text_input("Email *", placeholder="you@email.com")
+            
+            sender_msg = st.text_area("Message *", placeholder="Write your message here...", height=110)
+            btn_submit = st.form_submit_button("Send Message", use_container_width=True)
+            
+            if btn_submit:
+                if not sender_name.strip() or not sender_email.strip() or not sender_msg.strip():
+                    st.error("Please fill out all required fields.")
+                else:
+                    st.session_state.feedback_list.append({"name": sender_name, "message": sender_msg})
+                    st.success(f"Thank you, {sender_name}! Your message has been received.")
 
 # FOOTER
 st.markdown(
