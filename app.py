@@ -169,9 +169,9 @@ html {
     display: inline-block;
 }
 .project-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
     padding: 16px;
     margin-bottom: 12px;
 }
@@ -188,14 +188,57 @@ html {
     margin-bottom: 0.5rem;
 }
 .proj-outcome {
-    background: rgba(30, 58, 138, 0.25);
-    border: 1px solid rgba(59, 130, 246, 0.3);
-    border-radius: 8px;
-    padding: 10px 12px;
+    background: rgba(30, 41, 59, 0.45);
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    border-radius: 10px;
+    padding: 12px 14px;
     min-height: 120px;
     margin-bottom: 15px;
     font-size: 0.88rem;
-    color: #e2e8f0;
+    line-height: 1.5;
+    color: #cbd5e1;
+}
+
+/* GitHub Heatmap Container */
+.gh-container {
+    background: #0d1117;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    padding: 24px 20px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    transition: border-color 0.2s ease;
+}
+.gh-container:hover {
+    border-color: rgba(59, 130, 246, 0.45);
+}
+.gh-chart-img {
+    width: 100%;
+    max-width: 1100px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+.gh-chart-img:hover {
+    transform: scale(1.01);
+}
+
+/* Streamlit Button & Component Consistency */
+div.stButton > button, div.stLinkButton > a {
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    transition: all 0.2s ease !important;
+}
+div.stLinkButton > a:hover {
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.35) !important;
+    transform: translateY(-1px);
+}
+button[data-baseweb="tab"] {
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    padding: 8px 16px !important;
 }
 </style>
 
@@ -336,19 +379,30 @@ for row_idx in range(0, len(displayed_projects), 2):
                 st.markdown(f"**Status:** `{proj.get('status', 'Completed')}`")
                 st.markdown(f"**Role:** `{proj['role']}`")
                 st.markdown(f'<div class="proj-tools"><strong>Tools:</strong> <code>{proj["tools"]}</code></div>', unsafe_allow_html=True)
-                st.markdown(f'<div class="proj-outcome"><strong>Outcome:</strong> {proj["outcome"]}</div>', unsafe_allow_html=True)
+                st.markdown(f'<div class="proj-outcome"><strong>Description:</strong> {proj["outcome"]}</div>', unsafe_allow_html=True)
                 st.link_button("View Project", proj["link"], use_container_width=True)
 
 st.divider()
 
 # GITHUB & CONTRIBUTION CHARTS
 st.markdown('<div id="github" class="section-anchor"></div>', unsafe_allow_html=True)
+
+gh_head_col, gh_btn_col = st.columns([3, 1])
+with gh_head_col:
+    st.header("GitHub Contributions")
+    st.caption(f"Live activity and commit heatmap for **[@{CONFIG['GITHUB_USERNAME']}]({CONFIG['GITHUB_URL']})**")
+with gh_btn_col:
+    st.markdown("<div style='height: 15px;'></div>", unsafe_allow_html=True)
+    st.link_button("Open GitHub Profile", CONFIG["GITHUB_URL"], use_container_width=True)
+
 # Real live GitHub contribution heatmap
 chart_url = f"https://ghchart.rshah.org/40c463/{CONFIG['GITHUB_USERNAME']}"
 st.markdown(
     f"""
-    <div style="background: #0d1117; border: 1px solid #30363d; border-radius: 10px; padding: 15px; text-align: center;">
-        <img src="{chart_url}" alt="GitHub Contribution Chart" style="width: 100%; max-width: 850px; display: block; margin: 0 auto;" />
+    <div class="gh-container">
+        <a href="{CONFIG['GITHUB_URL']}" target="_blank" title="Click to view @{CONFIG['GITHUB_USERNAME']} on GitHub" style="text-decoration: none;">
+            <img src="{chart_url}" alt="GitHub Contribution Chart for {CONFIG['GITHUB_USERNAME']}" class="gh-chart-img" />
+        </a>
     </div>
     """,
     unsafe_allow_html=True
